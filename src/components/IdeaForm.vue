@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent class = 'ideaForm' > 
-    <input placeholder ='Add an Idea!' v-model= 'idea' type="text">
+    <input placeholder ='Add an Idea title!' v-model= 'idea' type="text">
+    <input placeholder ='Add a Description!' v-model= 'description' type="text">
   </form>
   <button @click= "handleSubmit">Add Idea</button>
 </template>
@@ -9,13 +10,14 @@
 export default {
   data(){
     return {
-      idea:''
+      idea:'',
+      description:'',
     }
   },
   methods:{
     handleSubmit(e){
       e.preventDefault()
-      this.$emit("addIdea",this.idea)
+      this.$emit("addIdea",this.idea,this.description)
       this.idea = ''
     }
   }

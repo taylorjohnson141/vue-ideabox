@@ -20,9 +20,9 @@ export default {
     }
   },
   methods:{
-    addIdea(idea){
+    addIdea(idea,description){
       if(!this.ideaList.includes(idea) && idea){
-        this.ideaList.push(idea)
+        this.ideaList.push({idea:idea,description:description,isComplete:false})
       }
     },
     deleteIdea(idea){
