@@ -1,6 +1,6 @@
 <template>
   <h1>IdeaBox</h1>
-  <Ideas @delete = "deleteIdea" :ideaList = "ideaList"/>
+  <Ideas @complete= 'completeIdea' @delete = "deleteIdea" :ideaList = "ideaList"/>
   <IdeaForm @addIdea = "addIdea"/>
 </template>
 
@@ -17,16 +17,27 @@ export default {
   data(){
     return{
       ideaList:[],
+      currentId : 0,
     }
   },
   methods:{
     addIdea(idea,description){
       if(!this.ideaList.includes(idea) && idea){
-        this.ideaList.push({idea:idea,description:description,isComplete:false})
+        this.ideaList.push({title:idea,description:description,isComplete:false,currentId:this.currentId})
+        this.currentId ++
       }
     },
     deleteIdea(idea){
-      this.ideaList.splice(this.ideaList.indexOf(idea),1)
+        this.ideaList = this.ideaList.filter((currentIdea) =>{
+        return currentIdea.currentId !== idea.currentId
+      })
+    },
+    completeIdea(idea){
+
+      let currentIdea = this.ideaList.find((currentIdea) =>{
+         return currentIdea.currentId === idea.currentId
+      })
+      currentIdea.isComplete = true
     }
   }
 }

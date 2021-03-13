@@ -19,6 +19,7 @@ export default {
       e.preventDefault()
       this.$emit("addIdea",this.idea,this.description)
       this.idea = ''
+      this.description = ''
     }
   }
 }

@@ -1,8 +1,10 @@
 <template>
   <div class = 'ideas'>
-    <div  class = 'idea' v-for = "idea in ideaList" :key= "idea">
-      <p>{{idea}}</p>
+    <div  :class = "{ complete: idea.isComplete, idea }" v-for = "idea in ideaList" :key= "idea">
+      <p>{{idea.title}}</p>
+      <p>{{idea.description}}</p>
       <button @click= "removeIdea(idea)">Delete Idea</button>
+      <button @click= "completeIdea(idea)">Complete idea</button>
     </div>
   </div>
 </template>
@@ -13,6 +15,9 @@ export default {
   methods:{
     removeIdea(idea){
       this.$emit('delete',idea)
+    },
+     completeIdea(idea){
+      this.$emit('complete',idea)
     }
   }
 }
@@ -28,5 +33,8 @@ export default {
 .idea{
   border: 1px blue solid;
   cursor: pointer;
+}
+.complete{
+    text-decoration: line-through;
 }
 </style>
